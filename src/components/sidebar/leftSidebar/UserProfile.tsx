@@ -1,6 +1,12 @@
+"use client";
 import { Avatar, Box, List, ListItem, Stack, Typography } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
+import { useAuth } from "@/context/AuthContext";
+import { AuthContextType } from "@/utils/types";
 function UserProfile() {
+  const authContextRespone: AuthContextType | null = useAuth();
+  if (!authContextRespone) throw new Error("Problem in context");
+  const { user }: AuthContextType = authContextRespone;
   return (
     <Stack spacing={2} component="section" sx={{ p: 2 }}>
       <Stack direction={"row"} spacing={2} alignItems={"center"}>
@@ -8,7 +14,7 @@ function UserProfile() {
           alt="Remy Sharp"
           src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001877.png"
         />
-        <Typography variant="subtitle1">Rohit Khairmode</Typography>
+        <Typography variant="subtitle1">{user?.userName}</Typography>
       </Stack>
       <Stack direction={"row"} justifyContent={"space-between"}>
         <Typography variant="body1" sx={{ opacity: "50%" }}>
