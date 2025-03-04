@@ -4,6 +4,7 @@ import Dashboards from "./Dashboards";
 import UserProfile from "./UserProfile";
 import Pages from "./Pages";
 import { useSideBarContext } from "@/context/SideBarContext";
+import VerticalDivider from "@/components/material-ui-wrapper/VerticalDivider";
 
 function SideBar() {
   const { leftSidebar } = useSideBarContext();
@@ -16,12 +17,7 @@ function SideBar() {
           <Pages />
         </Stack>
       )}
-      <Divider
-        orientation="vertical"
-        sx={{
-          height: "100%",
-        }}
-      />
+      <VerticalDivider />
     </Stack>
   );
 }

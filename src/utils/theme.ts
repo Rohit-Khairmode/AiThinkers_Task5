@@ -5,6 +5,9 @@ const theme = createTheme({
   typography: {
     fontFamily: "var(--font-roboto)",
   },
+  palette:{
+    // background:"#fff",
+  }
 });
 
 export default theme;

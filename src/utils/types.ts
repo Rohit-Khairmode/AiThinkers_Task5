@@ -1,3 +1,4 @@
+import { SxProps } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 
 export interface User {
@@ -24,3 +25,7 @@ export type AuthContextType = {
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
 };
+export interface WrapperComponetBaseProps {
+  sx?: SxProps;
+  children?: React.ReactNode;
+}

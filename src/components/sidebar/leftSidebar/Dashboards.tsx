@@ -15,6 +15,8 @@ import FolderIcon from "@mui/icons-material/Folder";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useReducer } from "react";
+import CustomList from "@/components/material-ui-wrapper/CustomList";
+import IconText from "@/components/material-ui-wrapper/IconText";
 const initialState = {
   eCommerce: false,
   projects: false,
@@ -38,29 +40,9 @@ const reducer = (
 function Dashboards() {
   const [listOpen, dispatch] = useReducer(reducer, initialState);
   return (
-    <List
-      sx={{
-        width: "100%",
-        maxWidth: 360,
-        borderRadius: "50%",
-      }}
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      subheader={
-        <ListSubheader
-          component="div"
-          id="nested-list-subheader"
-          sx={{ backgroundColor: "inherit" }}
-        >
-          Dashboards
-        </ListSubheader>
-      }
-    >
+    <CustomList subHeaderTitle="Dashboard">
       <ListItemButton>
-        <ListItemIcon>
-          <PieChartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Overview" sx={{ fontSize: "36px" }} />
+        <IconText icon={<PieChartIcon />} text="Overview" />
       </ListItemButton>
       <ListItemButton
         onClick={() => {
@@ -69,12 +51,11 @@ function Dashboards() {
         }}
       >
         {!listOpen.eCommerce ? <ChevronRightIcon /> : <ExpandMore />}
-        <ListItemIcon>
-          <BusinessCenterIcon />
-        </ListItemIcon>
-        <ListItemText primary="eCommerce" />
+        <IconText icon={<BusinessCenterIcon />} text="eCommerce" />
       </ListItemButton>
-      <Collapse in={listOpen.eCommerce} timeout="auto" unmountOnExit></Collapse>
+      <Collapse in={listOpen.eCommerce} timeout="auto" unmountOnExit>
+        {/*any nested list will go here */}
+      </Collapse>
       <ListItemButton
         onClick={() => {
           console.log("clicked", listOpen);
@@ -82,13 +63,9 @@ function Dashboards() {
         }}
       >
         {!listOpen.projects ? <ChevronRightIcon /> : <ExpandMore />}
-        <ListItemIcon>
-          <FolderIcon />
-        </ListItemIcon>
-        <ListItemText primary="Projects" />
+        <IconText icon={<FolderIcon />} text="Projects" />
       </ListItemButton>
-      <Collapse in={listOpen.projects} timeout="auto" unmountOnExit></Collapse>
-    </List>
+    </CustomList>
   );
 }
 

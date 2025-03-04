@@ -20,6 +20,7 @@ import { Logout } from "@mui/icons-material";
 import ViewSidebarIcon from "@mui/icons-material/ViewSidebar";
 import ViewSidebarOutlinedIcon from "@mui/icons-material/ViewSidebarOutlined";
 import { useRouter } from "next/navigation";
+import ToolTipIconButton from "../material-ui-wrapper/ToolTipIconButton";
 const Search = styled("div")(({ theme }) => ({
   padding: "0 10px",
   borderRadius: theme.shape.borderRadius,
@@ -58,38 +59,29 @@ function SearchBar() {
           placeholder="Search..."
         />
       </Search>
-      <Tooltip title={`Switch to ${mode === "light" ? "dark" : "light"}`} arrow>
-        <IconButton
-          onClick={() => {
-            toggleDarkMode();
-          }}
-        >
-          {mode === "light" ? (
-            <LightModeOutlinedIcon />
-          ) : (
-            <DarkModeOutlinedIcon />
-          )}
-        </IconButton>
-      </Tooltip>
-
-      <Tooltip title="History" arrow>
-        <IconButton>
-          <HistoryOutlinedIcon />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="LogOut" arrow>
-        <IconButton onClick={handleLogout}>
-          <Logout />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="toggleSideBar" arrow>
-        <IconButton
-          onClick={toggleRightSideBar}
-          sx={{ display: "flex", alignItems: "end" }}
-        >
-          {rightSidebar ? <ViewSidebarOutlinedIcon /> : <ViewSidebarIcon />}
-        </IconButton>
-      </Tooltip>
+      <ToolTipIconButton
+        title={`Switch to ${mode === "light" ? "dark" : "light"}`}
+        onClick={toggleDarkMode}
+      >
+        {mode === "light" ? (
+          <LightModeOutlinedIcon />
+        ) : (
+          <DarkModeOutlinedIcon />
+        )}
+      </ToolTipIconButton>
+      <ToolTipIconButton title="History">
+        <HistoryOutlinedIcon />
+      </ToolTipIconButton>
+      <ToolTipIconButton title="LogOut" onClick={handleLogout}>
+        <Logout />
+      </ToolTipIconButton>
+      <ToolTipIconButton
+        title="toggleSideBar"
+        onClick={toggleRightSideBar}
+        sx={{ display: "flex", alignItems: "end" }}
+      >
+        {rightSidebar ? <ViewSidebarOutlinedIcon /> : <ViewSidebarIcon />}
+      </ToolTipIconButton>
     </Stack>
   );
 }

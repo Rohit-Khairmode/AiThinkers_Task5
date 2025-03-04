@@ -4,17 +4,13 @@ import Notifications from "./Notifications";
 import Activities from "./Activities";
 import Contacts from "./Contacts";
 import { useSideBarContext } from "@/context/SideBarContext";
+import VerticalDivider from "@/components/material-ui-wrapper/VerticalDivider";
 
 function RightSideBar() {
   const { rightSidebar } = useSideBarContext();
   return (
     <Stack direction={"row"} padding={"4px"}>
-      <Divider
-        orientation="vertical"
-        sx={{
-          height: "100%",
-        }}
-      />
+      <VerticalDivider />
       {rightSidebar && (
         <Stack sx={{ padding: "4px" }}>
           <Notifications />

@@ -3,18 +3,16 @@
 import { useAuth } from "@/context/AuthContext";
 import { AuthContextType, AuthError, AuthInputs, User } from "@/utils/types";
 import { authSchema } from "@/utils/zodSchema";
-import {
-  Alert,
-  Box,
-  Button,
-  Paper,
-  Snackbar,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import CustomTextField from "./material-ui-wrapper/CustomTextField";
+import H5 from "./material-ui-wrapper/Typography/H5";
+import PrimaryButton from "./material-ui-wrapper/PrimaryButton";
+import SmallText from "./material-ui-wrapper/SmallText";
+import ToastMsg from "./material-ui-wrapper/ToastMsg";
+import ElevatedDiv from "./material-ui-wrapper/ElevatedDiv";
 
 export default function AuthForm() {
   const [toast, setToast] = useState<{
@@ -38,17 +36,10 @@ export default function AuthForm() {
   });
 
   const [error, setError] = useState<AuthError | null>(null);
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
@@ -90,88 +81,58 @@ export default function AuthForm() {
     setUser(data);
     router.replace("/dashboard");
   };
+  const handleFormChange = () => {
+    setFormData((prev: AuthInputs) => ({
+      ...prev,
+      type: prev.type === "register" ? "login" : "register",
+    }));
+    setError(null);
+  };
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        padding: 3,
-        maxWidth: 400,
-        margin: "auto",
-        marginTop: 5,
-        borderRadius: 2,
-      }}
-    >
-      <Typography variant="h5" fontWeight="bold" textAlign="center">
-        {formData.type === "register" ? "Register" : "Login"}
-      </Typography>
+    <ElevatedDiv>
+      <H5>{formData.type === "register" ? "Register" : "Login"}</H5>
       <Box component="form" onSubmit={handleSubmit} sx={{ marginTop: 2 }}>
-        <TextField
-          fullWidth
+        <CustomTextField
           label="Username"
           name="userName"
           value={formData.userName}
           onChange={handleChange}
-          variant="outlined"
-          margin="normal"
           error={Boolean(error?.userName)}
           helperText={error?.userName || ""}
         />
 
-        <TextField
-          fullWidth
+        <CustomTextField
           type="password"
           label="Password"
           name="password"
           value={formData.password}
           onChange={handleChange}
-          variant="outlined"
-          margin="normal"
           error={Boolean(error?.credentials || error?.password)}
           helperText={error?.credentials || error?.password || ""}
         />
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          sx={{ marginTop: 2 }}
-        >
+        <PrimaryButton sx={{ marginTop: 2 }}>
           {formData.type === "register" ? "Register" : "Login"}
-        </Button>
+        </PrimaryButton>
 
-        <Typography
-          variant="body2"
-          color="primary"
-          textAlign="center"
+        <SmallText
           sx={{ marginTop: 2, cursor: "pointer" }}
-          onClick={() => {
-            setFormData((prev: AuthInputs) => ({
-              ...prev,
-              type: prev.type === "register" ? "login" : "register",
-            }));
-            setError(null);
-          }}
+          onClick={handleFormChange}
         >
           {formData.type === "register"
             ? "Already have an account? Login"
             : "New user? Register"}
-        </Typography>
+        </SmallText>
       </Box>
-      <Snackbar
+      <ToastMsg
         open={toast.open}
-        autoHideDuration={3000}
-        onClose={() => setToast({ ...toast, open: false })}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        onSnackBarClose={() => setToast({ ...toast, open: false })}
+        onAlertClose={() => setToast({ ...toast, open: false })}
+        AlertSx={{ width: "100%" }}
+        severity={toast.severity}
       >
-        <Alert
-          onClose={() => setToast({ ...toast, open: false })}
-          severity={toast.severity}
-          sx={{ width: "100%" }}
-        >
-          {toast.message}
-        </Alert>
-      </Snackbar>
-    </Paper>
+        {toast.message}
+      </ToastMsg>
+    </ElevatedDiv>
   );
 }

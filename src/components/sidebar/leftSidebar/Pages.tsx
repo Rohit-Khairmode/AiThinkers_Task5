@@ -1,4 +1,13 @@
 "use client";
+import CustomList from "@/components/material-ui-wrapper/CustomList";
+import IconText from "@/components/material-ui-wrapper/IconText";
+import { ExpandMore } from "@mui/icons-material";
+import BookIcon from "@mui/icons-material/Book";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
 import {
   Collapse,
   List,
@@ -6,20 +15,8 @@ import {
   ListItemIcon,
   ListItemText,
   ListSubheader,
-  Stack,
-  Typography,
 } from "@mui/material";
-import PieChartIcon from "@mui/icons-material/PieChart";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import FolderIcon from "@mui/icons-material/Folder";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import React, { useReducer } from "react";
-import ContactPageIcon from "@mui/icons-material/ContactPage";
-import RecentActorsIcon from "@mui/icons-material/RecentActors";
-import CorporateFareIcon from "@mui/icons-material/CorporateFare";
-import BookIcon from "@mui/icons-material/Book";
-import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 type StateType = {
   Profile: boolean;
   Account: boolean;
@@ -65,24 +62,7 @@ const MainPages = [
 function Pages() {
   const [listOpen, dispatch] = useReducer(reducer, initialState);
   return (
-    <List
-      sx={{
-        width: "100%",
-        maxWidth: 360,
-        borderRadius: "50%",
-      }}
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      subheader={
-        <ListSubheader
-          component="div"
-          id="nested-list-subheader"
-          sx={{ backgroundColor: "inherit" }}
-        >
-          Pages
-        </ListSubheader>
-      }
-    >
+    <CustomList subHeaderTitle="Pages">
       {MainPages.map((curPage) => {
         return (
           <React.Fragment key={curPage.name}>
@@ -97,8 +77,7 @@ function Pages() {
               ) : (
                 <ExpandMore />
               )}
-              <ListItemIcon>{curPage.icon}</ListItemIcon>
-              <ListItemText primary={curPage.name} />
+              <IconText icon={curPage.icon} text={curPage.name} />
             </ListItemButton>
             <Collapse
               in={listOpen[curPage.name as keyof StateType]}
@@ -127,7 +106,7 @@ function Pages() {
           </React.Fragment>
         );
       })}
-    </List>
+    </CustomList>
   );
 }
 

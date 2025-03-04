@@ -8,6 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import H6 from "../material-ui-wrapper/Typography/H6";
 
 const barData = [
   { name: "Linux", value: 12000 },
@@ -19,9 +20,7 @@ function DeviceChart() {
   return (
     <Card sx={{ flex: 1, p: 2, borderRadius: 2, boxShadow: 3 }}>
       <CardContent>
-        <Typography variant="h6" align="left" gutterBottom>
-          Traffic by Device
-        </Typography>
+        <H6>Traffic by Device</H6>
         <ResponsiveContainer width="100%" height={250}>
           <BarChart data={barData}>
             <XAxis dataKey="name" />

@@ -11,32 +11,33 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import ToolTipIconButton from "../material-ui-wrapper/ToolTipIconButton";
+import SubTitle1 from "../material-ui-wrapper/Typography/SubTitle1";
 function InfoBar() {
   const { leftSidebar, toggleLeftSideBar } = useSideBarContext();
   return (
     <Stack direction={"row"} sx={{ padding: "20px" }} spacing={1}>
-      <Tooltip title="toggleSideBar" arrow>
-        <IconButton
-          onClick={toggleLeftSideBar}
-          sx={{ display: "flex", alignItems: "end" }}
-        >
-          {leftSidebar ? <ViewSidebarOutlinedIcon /> : <ViewSidebarIcon />}
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Add To Favourite" arrow>
-        <IconButton sx={{ display: "flex", alignItems: "end" }}>
-          <StarBorderIcon />
-        </IconButton>
-      </Tooltip>
+      <ToolTipIconButton
+        title="toggleSideBar"
+        onClick={toggleLeftSideBar}
+        iconStyle={{ display: "flex", alignItems: "end" }}
+      >
+        {leftSidebar ? <ViewSidebarOutlinedIcon /> : <ViewSidebarIcon />}
+      </ToolTipIconButton>
+
+      <ToolTipIconButton
+        title="Add To Favourite"
+        iconStyle={{ display: "flex", alignItems: "end" }}
+      >
+        <StarBorderIcon />
+      </ToolTipIconButton>
 
       <Breadcrumbs
         aria-label="breadcrumbs"
         sx={{ display: "flex", alignItems: "center" }}
       >
-        <Typography variant="subtitle1" sx={{ opacity: "50%" }}>
-          Dashboard
-        </Typography>
-        <Typography variant="subtitle1">Default</Typography>
+        <SubTitle1 sx={{ opacity: "50%" }}>Dashboard</SubTitle1>
+        <SubTitle1>Default</SubTitle1>
       </Breadcrumbs>
     </Stack>
   );

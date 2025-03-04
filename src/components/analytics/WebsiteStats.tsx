@@ -7,6 +7,7 @@ import {
   styled,
   Typography,
 } from "@mui/material";
+import SubTitle2 from "../material-ui-wrapper/Typography/SubTitle2";
 enum Traffic {
   medium = "medium",
   low = "low",
@@ -43,7 +44,7 @@ function WebsiteStats() {
             }}
           >
             <Box maxWidth={"50px"}>
-              <Typography variant="subtitle2">{cur.name}</Typography>
+              <SubTitle2>{cur.name}</SubTitle2>
             </Box>
             <Stack direction={"row"} alignItems={"center"} spacing={1}>
               {cur.traffic === "low" &&

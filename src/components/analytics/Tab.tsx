@@ -1,4 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
+import SubTitle1 from "../material-ui-wrapper/Typography/SubTitle1";
+import SubTitle2 from "../material-ui-wrapper/Typography/SubTitle2";
 export type TabType = {
   title: string;
   count: string;
@@ -13,10 +15,10 @@ function Tab({ data }: { data: TabType }) {
       padding={"16px"}
       sx={{ borderRadius: "12%", color: "#2a2a2a" }}
     >
-      <Typography variant="subtitle2">{data.title}</Typography>
+      <SubTitle2>{data.title}</SubTitle2>
       <Stack direction="row" spacing={2} alignItems={"center"}>
-        <Typography variant="subtitle1">{data.count}</Typography>
-        <Typography variant="subtitle2">{data.countChange}</Typography>
+        <SubTitle1>{data.count}</SubTitle1>
+        <SubTitle2>{data.countChange}</SubTitle2>
         {data.icon}
       </Stack>
     </Box>
