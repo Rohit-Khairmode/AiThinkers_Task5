@@ -1,5 +1,5 @@
-import { styled, SxProps, TextField } from "@mui/material";
-import { WrapperComponetBaseProps } from "./Typography/H5";
+import { WrapperComponetBaseProps } from "@/utils/types";
+import { TextField } from "@mui/material";
 
 interface CustomTextFieldProps extends WrapperComponetBaseProps {
   label: string;
