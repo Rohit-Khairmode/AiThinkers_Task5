@@ -1,7 +1,6 @@
-import { WrapperComponetBaseProps } from "@/utils/types";
 import { ListItemIcon, ListItemText, SxProps } from "@mui/material";
 
-interface IconText extends WrapperComponetBaseProps {
+interface IconText {
   icon: React.ReactNode;
   text: string;
   textStyle?: SxProps;

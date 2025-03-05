@@ -8,7 +8,7 @@ import {
   SxProps,
 } from "@mui/material";
 
-interface toastMsg extends WrapperComponetBaseProps {
+interface toastMsg {
   open: boolean;
   autoHideDuration?: number;
   onSnackBarClose?:
@@ -22,6 +22,7 @@ interface toastMsg extends WrapperComponetBaseProps {
   severity?: AlertColor | undefined;
   AlertSx?: SxProps;
   SnackBarSx?: SxProps;
+  children: React.ReactNode;
 }
 
 function ToastMsg({
