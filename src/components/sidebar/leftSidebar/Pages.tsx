@@ -68,7 +68,6 @@ function Pages() {
           <React.Fragment key={curPage.name}>
             <ListItemButton
               onClick={() => {
-                console.log("clicked", listOpen);
                 dispatch({ type: curPage.name });
               }}
             >

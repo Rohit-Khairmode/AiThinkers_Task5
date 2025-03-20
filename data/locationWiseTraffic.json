@@ -1,0 +1,22 @@
+[
+  {
+    "name": "United States",
+    "value": 27.4,
+    "color": "#000000"
+  },
+  {
+    "name": "Canada",
+    "value": 31,
+    "color": "#82ca9d"
+  },
+  {
+    "name": "Mexico",
+    "value": 56.3,
+    "color": "#8884d8"
+  },
+  {
+    "name": "Other",
+    "value": 17.1,
+    "color": "#99ccff"
+  }
+]

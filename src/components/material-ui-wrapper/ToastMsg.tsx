@@ -44,7 +44,11 @@ function ToastMsg({
       anchorOrigin={anchorOrigin}
       sx={SnackBarSx}
     >
-      <Alert onClose={onAlertClose} severity={severity} sx={AlertSx}>
+      <Alert
+        onClose={onAlertClose}
+        severity={severity}
+        sx={{ fontSize: "17px", fontWeight: 700, ...AlertSx }}
+      >
         {children}
       </Alert>
     </Snackbar>

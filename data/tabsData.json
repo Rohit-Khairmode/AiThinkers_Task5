@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Views",
+    "count": 8957,
+    "countChange": "12.06",
+    "color": "#EDEEFC"
+  },
+  {
+    "title": "Visits",
+    "count": 3671,
+    "countChange": "4.67",
+    "color": "#E6F1FD"
+  },
+  {
+    "title": "New Users",
+    "count": 512,
+    "countChange": "-15.03",
+    "color": "#EDEEFC"
+  },
+  {
+    "title": "Active Users",
+    "count": 2318,
+    "countChange": "6.08",
+    "color": "#E6F1FD"
+  }
+]

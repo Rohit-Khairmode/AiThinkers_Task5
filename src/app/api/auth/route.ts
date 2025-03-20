@@ -1,6 +1,6 @@
 import { AuthInputs, ServerUser } from "@/utils/types";
 import { authSchema } from "@/utils/zodSchema";
-import { readUsers, writeUsers } from "@/utils/fileHandler";
+import { dataFile, readUser, writeUsers } from "@/utils/fileHandler";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request, _: NextResponse) {
@@ -24,8 +24,7 @@ export async function POST(req: Request, _: NextResponse) {
     );
   }
 
-  const users: ServerUser[] = readUsers();
-  console.log(users);
+  const users: ServerUser[] = readUser();
 
   if (type === "register") {
     if (users?.find((u: any) => u.userName === userName)) {

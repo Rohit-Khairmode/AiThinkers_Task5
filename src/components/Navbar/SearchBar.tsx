@@ -16,11 +16,12 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useSideBarContext } from "@/context/SideBarContext";
 import { AuthContextType } from "@/utils/types";
-import { Logout } from "@mui/icons-material";
+import { Edit, EditOutlined, Logout } from "@mui/icons-material";
 import ViewSidebarIcon from "@mui/icons-material/ViewSidebar";
 import ViewSidebarOutlinedIcon from "@mui/icons-material/ViewSidebarOutlined";
 import { useRouter } from "next/navigation";
 import ToolTipIconButton from "../material-ui-wrapper/ToolTipIconButton";
+import { useEditIconContext } from "@/context/ShowEditIconContext";
 const Search = styled("div")(({ theme }) => ({
   padding: "0 10px",
   borderRadius: theme.shape.borderRadius,
@@ -41,8 +42,8 @@ function SearchBar() {
   const [searchKey, setSearchKey] = useState<string>("");
   const { mode, toggleDarkMode } = useDarkModeContext();
   const { rightSidebar, toggleRightSideBar } = useSideBarContext();
+  const { editable, setEditable } = useEditIconContext();
   const handleLogout = () => {
-    console.log("User logged out");
     setUser(null);
     router.push("/"); // Redirect to login page
   };
@@ -69,8 +70,13 @@ function SearchBar() {
           <DarkModeOutlinedIcon />
         )}
       </ToolTipIconButton>
-      <ToolTipIconButton title="History">
-        <HistoryOutlinedIcon />
+      <ToolTipIconButton
+        title={`${editable ? "Disable" : "Enable"} Edit`}
+        onClick={() => {
+          setEditable(!editable);
+        }}
+      >
+        {editable ? <EditOutlined /> : <Edit />}
       </ToolTipIconButton>
       <ToolTipIconButton title="LogOut" onClick={handleLogout}>
         <Logout />

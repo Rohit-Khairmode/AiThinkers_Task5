@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Google",
+    "traffic": "medium"
+  },
+  {
+    "name": "Instagram",
+    "traffic": "low"
+  },
+  {
+    "name": "Youtube",
+    "traffic": "low"
+  },
+  {
+    "name": "Twitter",
+    "traffic": "medium"
+  },
+  {
+    "name": "Facebook",
+    "traffic": "high"
+  }
+]

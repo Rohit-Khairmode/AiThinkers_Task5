@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Jan",
+    "thisYear": 25328,
+    "lastYear": 14669
+  },
+  {
+    "name": "Feb",
+    "thisYear": 17335,
+    "lastYear": 23131
+  },
+  {
+    "name": "Mar",
+    "thisYear": 18409,
+    "lastYear": 26375
+  },
+  {
+    "name": "Apr",
+    "thisYear": 13473,
+    "lastYear": 20440
+  },
+  {
+    "name": "May",
+    "thisYear": 22165,
+    "lastYear": 21929
+  },
+  {
+    "name": "Jun",
+    "thisYear": 22100,
+    "lastYear": 24081
+  },
+  {
+    "name": "Jul",
+    "thisYear": 27915,
+    "lastYear": 21092
+  }
+]

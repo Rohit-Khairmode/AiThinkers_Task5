@@ -8,6 +8,12 @@ export interface User {
 export interface ServerUser extends User {
   password: string;
 }
+export type TabsInFile = {
+  title: string;
+  count: string;
+  countChange: string;
+  color: string;
+};
 
 export type AuthError = {
   userName?: string;
@@ -29,3 +35,8 @@ export interface WrapperComponetBaseProps {
   sx?: SxProps;
   children?: React.ReactNode;
 }
+export type LineDataType = {
+  name: string;
+  thisYear: number;
+  lastYear: number;
+};

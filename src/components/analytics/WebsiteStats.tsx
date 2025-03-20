@@ -1,29 +1,29 @@
 "use client";
 import {
   Box,
+  Button,
   Card,
   CardContent,
+  Skeleton,
   Stack,
   styled,
   Typography,
 } from "@mui/material";
 import SubTitle2 from "../material-ui-wrapper/Typography/SubTitle2";
+import { useDataFetcher } from "@/utils/useDataFetcher";
+import { Edit } from "@mui/icons-material";
+import { useEditIconContext } from "@/context/ShowEditIconContext";
+import GeneralGraph from "../GeneralGraph";
+import { useState } from "react";
 enum Traffic {
   medium = "medium",
   low = "low",
   high = "high",
 }
-type WebSiteStatType = {
+export type WebSiteStatType = {
   name: string;
   traffic: Traffic;
 };
-const data: WebSiteStatType[] = [
-  { name: "Google", traffic: Traffic.medium },
-  { name: "Instagram", traffic: Traffic.low },
-  { name: "Youtube", traffic: Traffic.medium },
-  { name: "Twitter", traffic: Traffic.high },
-  { name: "Facebook", traffic: Traffic.low },
-];
 const WesiteStatContainer = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.grey[300],
   padding: "10px",
@@ -31,39 +31,59 @@ const WesiteStatContainer = styled(Stack)(({ theme }) => ({
   color: "#2a2a2a",
 }));
 function WebsiteStats() {
+  const { data, error, isLoading, setdata } =
+    useDataFetcher("data/webSiteData");
+  const { editable } = useEditIconContext();
+  const [open, setOpen] = useState<boolean>(false);
   return (
-    <WesiteStatContainer spacing={1}>
-      <Typography variant="subtitle1">Traffic By Website</Typography>
-      {data.map((cur) => {
-        return (
-          <Box
-            key={cur.name}
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-            }}
-          >
-            <Box maxWidth={"50px"}>
-              <SubTitle2>{cur.name}</SubTitle2>
+    <GeneralGraph
+      query="data/webSiteData"
+      open={open}
+      setOpen={setOpen}
+      error={error}
+      isLoading={isLoading}
+      setState={setdata}
+    >
+      <WesiteStatContainer spacing={1}>
+        <Stack direction="row" justifyContent="space-between">
+          <Typography variant="subtitle1">Traffic By Website</Typography>
+          {editable && (
+            <Button color="inherit" onClick={() => setOpen(true)}>
+              <Edit />
+            </Button>
+          )}
+        </Stack>
+        {data?.map((cur: WebSiteStatType) => {
+          return (
+            <Box
+              key={cur.name}
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+              }}
+            >
+              <Box maxWidth={"50px"}>
+                <SubTitle2>{cur.name}</SubTitle2>
+              </Box>
+              <Stack direction={"row"} alignItems={"center"} spacing={1}>
+                {cur.traffic === "low" &&
+                  [true, false, false].map((cur) => {
+                    return <Slide isFilled={cur} key={Math.random()} />;
+                  })}
+                {cur.traffic === "medium" &&
+                  [true, true, false].map((cur) => {
+                    return <Slide isFilled={cur} key={Math.random()} />;
+                  })}
+                {cur.traffic === "high" &&
+                  [true, true, true].map((cur) => {
+                    return <Slide isFilled={cur} key={Math.random()} />;
+                  })}
+              </Stack>
             </Box>
-            <Stack direction={"row"} alignItems={"center"} spacing={1}>
-              {cur.traffic === "low" &&
-                [true, false, false].map((cur) => {
-                  return <Slide isFilled={cur} key={Math.random()} />;
-                })}
-              {cur.traffic === "medium" &&
-                [true, true, false].map((cur) => {
-                  return <Slide isFilled={cur} key={Math.random()} />;
-                })}
-              {cur.traffic === "high" &&
-                [true, true, true].map((cur) => {
-                  return <Slide isFilled={cur} key={Math.random()} />;
-                })}
-            </Stack>
-          </Box>
-        );
-      })}
-    </WesiteStatContainer>
+          );
+        })}
+      </WesiteStatContainer>
+    </GeneralGraph>
   );
 }
 

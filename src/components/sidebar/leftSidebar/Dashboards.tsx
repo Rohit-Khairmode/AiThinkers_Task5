@@ -46,7 +46,6 @@ function Dashboards() {
       </ListItemButton>
       <ListItemButton
         onClick={() => {
-          console.log("clicked", listOpen);
           dispatch({ type: "eCommerce" });
         }}
       >
@@ -58,7 +57,6 @@ function Dashboards() {
       </Collapse>
       <ListItemButton
         onClick={() => {
-          console.log("clicked", listOpen);
           dispatch({ type: "projects" });
         }}
       >

@@ -13,6 +13,7 @@ import PrimaryButton from "./material-ui-wrapper/PrimaryButton";
 import SmallText from "./material-ui-wrapper/SmallText";
 import ToastMsg from "./material-ui-wrapper/ToastMsg";
 import ElevatedDiv from "./material-ui-wrapper/ElevatedDiv";
+import { axiosInstance } from "@/utils/axios";
 
 export default function AuthForm() {
   const [toast, setToast] = useState<{
@@ -43,43 +44,38 @@ export default function AuthForm() {
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
-    const validationResult = authSchema.safeParse(formData);
-    if (!validationResult.success) {
-      const errorObj = validationResult.error.format();
+    try {
+      const validationResult = authSchema.safeParse(formData);
+      if (!validationResult.success) {
+        const errorObj = validationResult.error.format();
 
-      setError({
-        userName: errorObj.userName?._errors[0],
-        password: errorObj.password?._errors[0],
+        setError({
+          userName: errorObj.userName?._errors[0],
+          password: errorObj.password?._errors[0],
+        });
+        return;
+      }
+
+      let res = await axiosInstance.post("auth", formData);
+
+      setError(null);
+      setToast({
+        open: true,
+        message: `${
+          formData.type === "register" ? "Registered" : "Logged in"
+        } successfully!`,
+        severity: "success",
       });
-      return;
-    }
-
-    let res = await fetch("/api/auth", {
-      method: "POST",
-      body: JSON.stringify(formData),
-    });
-    const data: User = await res.json();
-
-    if (res.status === 400 || res.status === 401 || res.status === 405) {
-      setError({ ...data });
+      setUser(res.data);
+      router.replace("/dashboard");
+    } catch (error: any) {
+      setError({ ...error?.response.data });
       setToast({
         open: true,
         message: "Authentication failed!",
         severity: "error",
       });
-      return;
     }
-
-    setError(null);
-    setToast({
-      open: true,
-      message: `${
-        formData.type === "register" ? "Registered" : "Logged in"
-      } successfully!`,
-      severity: "success",
-    });
-    setUser(data);
-    router.replace("/dashboard");
   };
   const handleFormChange = () => {
     setFormData((prev: AuthInputs) => ({
